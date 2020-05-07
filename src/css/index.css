@@ -2,6 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --level-unknown: #e6e6e6;
+  --level-low: green;
+  --level-medium: yellow;
+  --level-high: red;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 @media screen and (min-width: 900px) {
   #panel {
     min-width: 400px;
@@ -14,7 +25,12 @@
   }
 }
 
+#searchbox__result li:target {
+  @apply border border-teal-600;
+}
+
 #searchbox__result li {
+  border-radius: 4px 0 0 4px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -27,7 +43,6 @@
 }
 
 #searchbox__result li:hover {
-  border-radius: 4px 0 0 4px;
   @apply bg-teal-600 text-white;
 }
 
@@ -69,13 +84,6 @@
   transition: fill 0.8s;
   fill: var(--level-unknown);
   cursor: help;
-}
-
-:root {
-  --level-unknown: #e6e6e6;
-  --level-low: green;
-  --level-medium: yellow;
-  --level-high: red;
 }
 
 select {

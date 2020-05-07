@@ -1,87 +1,12 @@
-import { parse } from "papaparse";
-
-declare namespace Datagouv {
-  export interface Dataset {
-    acronym: null;
-    archived: null;
-    badges: any[];
-    created_at: Date;
-    deleted: null;
-    description: string;
-    frequency: string;
-    frequency_date: null;
-    id: string;
-    last_modified: Date;
-    last_update: Date;
-    license: string;
-    metrics: Metrics;
-    organization: Organization;
-    owner: null;
-    page: string;
-    private: boolean;
-    resources: Resource[];
-    slug: string;
-    spatial: null;
-    tags: any[];
-    temporal_coverage: null;
-    title: string;
-    uri: string;
-  }
-
-  interface Metrics {
-    discussions: number;
-    followers: number;
-    issues: number;
-    reuses: number;
-    views: number;
-  }
-
-  interface Organization {
-    acronym: null;
-    class: string;
-    id: string;
-    logo: string;
-    logo_thumbnail: string;
-    name: string;
-    page: string;
-    slug: string;
-    uri: string;
-  }
-
-  interface Resource {
-    checksum: Checksum;
-    created_at: Date;
-    description: null;
-    filesize: number;
-    filetype: string;
-    format: string;
-    id: string;
-    last_modified: Date;
-    latest: string;
-    metrics: ResourceMetrics;
-    mime: string;
-    preview_url: string;
-    published: Date;
-    title: string;
-    type: string;
-    url: string;
-  }
-
-  interface Checksum {
-    type: string;
-    value: string;
-  }
-
-  interface ResourceMetrics {
-    views: number;
-  }
+export interface Dataset {
+  date: string;
+  codeDepartement: string;
+  nomDepartement: string;
+  nomRegion: string;
+  indicateurSynthese: ActivityColor;
 }
 
-export type Data = {
-  departement: string;
-  extract_date: string;
-  indic_synthese: "vert" | "orange" | "rouge";
-};
+type ActivityColor = "vert" | "orange" | "rouge";
 
 /**
  * Splits a list into sub-lists stored in an object, based on the result of
@@ -114,15 +39,9 @@ export function groupBy<T>(fn: (a: T) => string, list: T[]) {
  */
 export async function load_data() {
   const dataset =
-    "https://www.data.gouv.fr/fr/datasets/r/f2d0f955-f9c4-43a8-b588-a03733a38921";
+    "https://www.data.gouv.fr/fr/datasets/r/01151af0-3209-4e89-94ab-9b319001c159";
 
-  const raw = await fetch(dataset)
-    .then((res) => res.text())
-    .then((text) =>
-      parse(text, {
-        header: true,
-      })
-    );
+  const data = await fetch(dataset).then((res) => res.json());
 
-  return groupBy<Data>((i) => i.extract_date, raw.data);
+  return groupBy<Dataset>((i) => i.date, data);
 }

@@ -18,6 +18,7 @@ async function main() {
     container.append(code, name);
 
     item.setAttribute("data-postcode", department.id);
+    item.setAttribute("id", `list-fr-${department.id.substring(3)}`);
     item.append(container, symbol);
 
     list.appendChild(item);
@@ -63,8 +64,10 @@ async function main() {
 
   for (let chunk of data[latest]) {
     document
-      .querySelectorAll(`[data-postcode="FR-${chunk.departement}"]`)
-      .forEach((i) => i.setAttribute("data-level", determineLevel(chunk.indic_synthese)));
+      .querySelectorAll(`[data-postcode="FR-${chunk.codeDepartement}"]`)
+      .forEach((i) =>
+        i.setAttribute("data-level", determineLevel(chunk.indicateurSynthese))
+      );
   }
 
   /**
