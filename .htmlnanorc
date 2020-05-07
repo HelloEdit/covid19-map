@@ -1,7 +1,9 @@
 {
-    minifySvg: {
-        plugins: [
-            { removeTitle: false },
-        ],
-    },
+  "minifySvg": {
+    "plugins": [
+      {
+        "removeTitle": false
+      }
+    ]
+  }
 }
