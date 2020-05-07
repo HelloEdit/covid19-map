@@ -1,0 +1,23 @@
+{
+  "name": "dalton",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "parcel src/index.html",
+    "build": "parcel build src/index.html --public-url https://covid19.helloedit.eu/"
+  },
+  "devDependencies": {
+    "@types/papaparse": "^5.0.3",
+    "autoprefixer": "^9.7.6",
+    "parcel-bundler": "^1.12.4",
+    "parcel-plugin-metaimage": "^1.2.3",
+    "postcss-modules": "^2.0.0",
+    "prettier": "^2.0.5",
+    "tailwindcss": "^1.4.4",
+    "typescript": "^3.8.3"
+  },
+  "dependencies": {
+    "papaparse": "^5.2.0"
+  }
+}
